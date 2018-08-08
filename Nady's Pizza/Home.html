@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Nady's Pizza</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="./app/app.js"></script>
+        <script src="./app/pizzaController.js"></script>
+        <link rel="stylesheet" type="text/css" href="./app/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body ng-controller="pizzaController">
+        <div class="container"> 
+            <div class="header">
+                <h1 align="center">Nady's Pizza</h1>
+                <div class="header-right">
+                    <a class="active" href="./Home.html">Home</a>
+                    <a href="./Register.html">Sign Up</a>
+                    <a href="./Login.html">Log In</a>
+                </div>
+            </div>                
+            <h2>{{model.title}}</h2>
+            <table >
+                <tr ng-repeat="dish in pizza" >
+                    <td><label><input type="radio" name="category" ng-click="changeMainDish(dish.name)" /> {{$index+1}}. {{dish.name}}</label></td>
+                    <td ><p align="center"> {{dish.price}}</p></td>
+                </tr>
+            </table>
+    
+            <h3>Topping Search</h3>
+            <input type="text" id="rcorners" placeholder="Search here ...Select No-topping in case topping not required " class="form-control" ng-model="model.search">
+    
+            <div ng-hide="model.search">
+                Enter the search criteria above [Select No-topping in case topping not required].
+            </div>
+    
+            <div ng-show="model.search" ng-repeat="t in model.availableToppings|filter:model.search">
+                <span ng-click="addTopping(t)">{{t}}</span>
+            </div>
+            <div>
+                <h3>Selected Item from {{Menu.title}}</h3>
+                <pre id="rcorners">{{mainDish}}</pre>
+            </div>
+            <div>
+                <h3>Special Instuctions (For Kitchen Staff)</h3>
+                <textarea id="rcorners" placeholder="Regular" class="form-control" ng-model="specialInstructions"></textarea>
+            </div>
+            <div ng-repeat="t in model.toppings">
+                <h3>Order Summary</h3>
+                <pre id="rcorners" >{{ mainDish }} with topping {{t}} - Specifications: [ {{ specialInstructions }} ] </pre>
+            </div>
+            
+        </div>    
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="./app/app.js"></script>
+        <script src="./app/pizzaController.js"></script>
+    </body>
+</html>
